@@ -1,0 +1,34 @@
+<div class="h-screen w-16 bg-[--green] sticky top-0 left-0 flex flex-col justify-center z-10">
+    <!-- Logo -->
+    <div class="w-full h-[50px] flex items-center justify-center text-white">
+        <svg xmlns="http://www.w3.org/2000/svg" width="26" height="26" viewBox="0 0 26 26">
+            <path fill="currentColor" d="M14.3 5.2L5.4 2.7l-2.5 8.9-2.5 8.9 8.9 2.4 2.5-8.8z"></path>
+            <path fill="currentColor" d="M14.223 14.131l8.853-2.503 2.503 8.853-8.853 2.503z"></path>
+        </svg>
+    </div>
+    <!-- Menu -->
+    <div class="flex flex-auto flex-col py-8 gap-8 text-xl text-white sidebar-menu">
+        <a th:href="@{/company/dashboard}" th:class="${ActivePage == 'HOME'} ? 'active' : ''">
+            <i class="fa-solid fa-chart-simple"></i>
+            <div class="tooltip">Home</div>
+        </a>
+        <a th:href="@{/company/dashboard/profile}" th:class="${ActivePage == 'PROFILE'} ? 'active' : ''">
+            <i class="fa-solid fa-building"></i>
+            <div class="tooltip">Profile</div>
+        </a>
+        <a th:href="@{/company/dashboard/jobs}" th:class="${ActivePage == 'JOBS'} ? 'active' : ''">
+            <i class="fa-solid fa-suitcase"></i>
+            <div class="tooltip">Jobs</div>
+        </a>
+        <a th:href="@{/company/dashboard/applications}" th:class="${ActivePage == 'APPLICATIONS'} ? 'active' : ''">
+            <i class="fa-solid fa-clipboard-list"></i>
+            <div class="tooltip">Applications</div>
+        </a>
+
+        <!-- Logout -->
+        <a href="/logout" class="mt-auto">
+            <i class="fa-solid fa-right-from-bracket"></i>
+            <div class="tooltip">Logout</div>
+        </a>
+    </div>
+</div>

@@ -1,0 +1,19 @@
+version: "3"
+services:
+  postgres:
+    container_name: jobspot-postgres
+    image: postgres:latest
+    ports:
+      - "5432:5432"
+    volumes:
+      - /var/lib/postgresql/data
+    environment:
+      - POSTGRES_USER=postgres
+      - POSTGRES_PASSWORD=postgres
+      - POSTGRES_DB=jobspot
+    networks:
+      - postgres
+
+networks:
+  postgres:
+    driver: bridge

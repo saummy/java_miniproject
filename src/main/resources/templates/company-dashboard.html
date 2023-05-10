@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head" :: head></head>
+<body>
+    <div class="flex h-full">
+        <!-- Sidebar -->
+        <div th:replace="fragments/dashboard/company/sidebar" :: div></div>
+        <!-- Content -->
+        <div class="flex-auto">
+            <!-- Header -->
+            <header th:replace="fragments/dashboard/company/header" :: header></header>
+            <!-- Main content -->
+            <div>
+                <!-- Route based page content -->
+                <div th:if="${ActivePage == 'HOME'}">
+                    <div th:replace="fragments/dashboard/company/home" :: div></div>
+                </div>
+                <div th:if="${ActivePage == 'PROFILE'}">
+                    <div th:replace="fragments/dashboard/company/profile" :: div></div>
+                </div>
+                <div th:if="${ActivePage == 'JOBS'}">
+                    <div th:replace="fragments/dashboard/company/jobs" :: div></div>
+                </div>
+                <div th:if="${ActivePage == 'APPLICATIONS'}">
+                    <div th:replace="fragments/dashboard/company/applications" :: div></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div id="portal"></div>
+</body>
+
+</html>

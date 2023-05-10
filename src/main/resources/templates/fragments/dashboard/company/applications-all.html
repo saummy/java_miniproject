@@ -1,0 +1,31 @@
+<div class="mt-10 mb-4">
+   <span th:text="${count}">43</span> Open Jobs
+</div>
+<div>
+   <table>
+      <thead>
+      <tr>
+         <th>Job Id</th>
+         <th>Role</th>
+         <th>Category</th>
+         <th>Applications</th>
+         <th>Tenure</th>
+         <th>Status</th>
+         <th>Posted</th>
+      </tr>
+      </thead>
+      <tbody>
+      <tr th:each="job : ${Jobs}" class="data-row">
+         <td class="text-[--blue] hover:underline">
+            <a th:href="@{/company/dashboard/applications/{jobId}(jobId=${job.referenceId})}" th:text="${job.referenceId}"></a>
+         </td>
+         <td th:text="${job.title}"></td>
+         <td th:text="${job.category.displayValue}"></td>
+         <td th:text="${job.applicantsSize}"></td>
+         <td th:text="${job.tenure.displayValue}"></td>
+         <td><div th:class="${job.expired} ? 'badge red' : 'badge green'" th:text="${job.expired} ? 'Expired' : 'Active'"></div></td>
+         <td th:text="${job.createdAt}" data-js="xTime"></td>
+      </tr>
+      </tbody>
+   </table>
+</div>

@@ -1,0 +1,15 @@
+<div class="top-[50px] left-[64px] absolute right-0 block bottom-0 overflow-auto z-0">
+   <div class="flex flex-col mt-10 px-[50px] overflow-hidden">
+      <div>
+         <h1 class="text-2xl font-normal pb-1">Applications</h1>
+         <div class="pb-0.5">Manage all job applications in one place.</div>
+      </div>
+      <!-- Route based page content -->
+      <div th:if="${ActivePageLevel1 == 'APPLICATIONS_ALL'}">
+         <div th:replace="fragments/dashboard/company/applications-all" :: div></div>
+      </div>
+      <div th:if="${ActivePageLevel1 == 'APPLICATIONS_SINGLE'}">
+         <div th:replace="fragments/dashboard/company/applications-single" :: div></div>
+      </div>
+   </div>
+</div>

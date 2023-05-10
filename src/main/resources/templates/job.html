@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head" :: head></head>
+<body>
+<!-- Header -->
+<header class="h-16 border-b border-solid border-slate-200 px-6 flex items-center">
+    <img th:src="@{/assets/logo.svg}" alt="Jobspot" class="mr-auto h-8"/>
+    <a class="font-semibold text-slate-900 mx-4" href="/auth/login/candidate">Log In</a>
+    <a class="btn" href="/auth/signup/candidate">Sign Up</a>
+</header>
+<main>
+    <div class="mt-10 flex px-16 mx-4 flex-col">
+        <div class="py-2 w-3/4">
+
+            <!-- Alerts -->
+            <div th:if="${HasAlertDanger}" class="alert danger my-6 w-1/2">
+                <i class="fa-solid fa-circle-info mr-1"></i>
+                <span th:text="${AlertValue}"></span>
+            </div>
+
+            <div>
+                <img th:src="${Job.company.companyProfile.logo}" class="h-14 w-14">
+            </div>
+            <h1 th:text="${Job.title}" class="text-xl font-semibold my-3"></h1>
+            <p class="text-[--muted] mb-3">
+                <span th:text="${Job.company.name}"></span>
+                <span th:text="${Job.location}" class="bullet"></span>
+                <span th:text="${Job.type.getDisplayValue()}" class="bullet"></span>
+            </p>
+            <div class="my-3">
+                <div class="mb-2"><i class="fa-solid fa-suitcase mr-2"></i>
+                    <span th:text="${Job.tenure.displayValue}"></span>
+                    (<span th:text="${Job.experienceLevel.displayValue}"></span>)
+                    <span class="bullet" th:text="${Job.category.displayValue}"></span>
+                </div>
+                <div><i class="fa-regular fa-calendar-check mr-2"></i><span th:text="${Job.openTill}"></span></div>
+            </div>
+            <form method="post" th:action="@{/job/{id}(id=${Job.referenceId})}">
+                <input type="hidden" th:value="${Job.referenceId}">
+                <button type="submit" class="btn my-2 block" id="jsViewApplications">Apply</button>
+            </form>
+            <h1 class="font-medium text-lg my-2">About the job</h1>
+            <p id="jdJobDescription" class="my-3 overflow-auto text-justify" style="max-height: 400px"></p>
+            <script th:inline="javascript">
+                const description = /*[[${Job.description}]]*/ '';
+                document.getElementById("jdJobDescription").innerHTML = description.replace(/\n/g, "<br>");
+            </script>
+        </div>
+    </div>
+</main>
+</body>
+</html>

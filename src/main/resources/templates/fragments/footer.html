@@ -1,0 +1,11 @@
+<footer class="m-[auto_24px_24px] rounded-lg bg-[--green] px-20 py-24 text-white">
+    <div class="flex pt-4 border-t border-solid border-white text-sm">
+        <p id="footer-copyright"></p>
+        <a class="ml-10 underline" th:href="@{/auth/login/company}">Company Login</a>
+        <a class="ml-4 underline" th:href="@{/auth/login/admin}">Admin Login</a>
+        <script>
+            const copyright = `© ${new Date().getFullYear()} JobSpot Inc.`
+            document.querySelector("#footer-copyright").innerHTML = copyright
+        </script>
+    </div>
+</footer>

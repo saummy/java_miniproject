@@ -1,0 +1,36 @@
+<div class="top-[50px] left-[64px] absolute right-0 block bottom-0 overflow-auto">
+    <div class="flex flex-col mt-10 px-[50px] overflow-hidden">
+        <div>
+            <h1 class="text-2xl font-normal pb-1">Candidates</h1>
+            <div class="pb-0.5">Manage all the candidates (end users) in one place.</div>
+        </div>
+        <div class="mt-10 relative w-[450px]">
+            <input class="input" type="text" placeholder="Search users" data-js-filter="1">
+        </div>
+        <div class="my-4">
+            <span th:text="${count}"></span> Candidates
+        </div>
+        <div class="overflow-auto" style="max-height: calc(100vh - 285px)">
+            <table data-js-filter-table="1" id="admin-candidates-table">
+                <thead>
+                    <tr>
+                        <th>Name</th>
+                        <th>Email</th>
+                        <th>Account Status</th>
+                        <th>Applications</th>
+                        <th>Joined</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <tr th:each="candidate : ${candidates}" class="data-row">
+                        <td th:text="${candidate.name}" class="text-[--blue] hover:underline"></td>
+                        <td th:text="${candidate.email}"></td>
+                        <td><div class="badge green">Active</div></td>
+                        <td>12</td>
+                        <td th:text="${candidate.createdAt}" data-js="xTime"></td>
+                    </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+</div>

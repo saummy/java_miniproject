@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head" :: head></head>
+<body>
+<!-- Header -->
+<header class="h-16 border-b border-solid border-slate-200 px-6 flex items-center">
+    <img th:src="@{/assets/logo.svg}" alt="Jobspot" class="mr-auto h-8"/>
+    <a class="font-semibold text-slate-900 mx-4" href="/auth/login/candidate">Log In</a>
+    <a class="btn" href="/auth/signup/candidate">Sign Up</a>
+</header>
+<main>
+    <div class="mt-10 flex px-16 mx-4 flex-col">
+        <h1 class="font-medium text-md mb-4">Found <span th:text="${Jobs.size()}"></span> Matching jobs</h1>
+        <div class="w-3/5 overflow-auto mx-auto" style="max-height: calc(100vh - 200px)">
+            <ul class="list-none">
+                <li th:each="job : ${Jobs}"  class="flex border-b border-solid border-[#d8dcde] py-2 cursor-pointer">
+                    <div>
+                        <img th:src="${job.logo}" class="h-14 w-14">
+                    </div>
+                    <div class="pl-3 grow">
+                        <a th:text="${job.title}" th:href="@{/job/{id}(id=${job.referenceId})}" class="font-medium text-base hover:underline"></a>
+                        <p th:text="${job.companyName}"></p>
+                        <p>
+                            <span th:text="${job.location}"></span>
+                            <span th:text="${job.type.getDisplayValue()}" class="bullet"></span>
+                            <span th:text="${job.tenure.getDisplayValue()}" class="bullet"></span>
+                        </p>
+                    </div>
+                </li>
+            </ul>
+        </div>
+    </div>
+</main>
+</body>
+</html>

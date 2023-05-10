@@ -1,0 +1,16 @@
+spring:
+    jpa:
+        hibernate:
+            ddl-auto: update
+        database-platform: org.hibernate.dialect.PostgreSQLDialect
+    datasource:
+        url: "jdbc:postgresql://localhost:5432/jobspot"
+        username: postgres
+        password: postgres
+    security:
+        basic:
+            enabled: false
+    mvc:
+        media-types:
+            application:
+                javascript: application/javascript

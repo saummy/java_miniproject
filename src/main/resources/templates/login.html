@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head" :: head></head>
+<body class="bg-[#f1f4f5]">
+    <main class="flex flex-col">
+        <!-- Header -->
+        <div class="flex items-center justify-center py-8">
+            <a href="/">
+                <img th:src="@{/assets/logo.svg}" alt="Jobspot" class="h-8"/>
+            </a>
+        </div>
+
+        <!-- Login Form -->
+        <div class="flex flex-col items-center grow p-6">
+            <div class="flex flex-col w-full max-w-[360px]">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h1 class="mb-6 text-center text-2xl text-[--text] font-bold">Sign in to Jobspot</h1>
+
+                    <!-- Alerts -->
+                    <div th:if="${m_hasAlertSuccess}" class="alert success mb-6">
+                        <i class="fa-solid fa-circle-info mr-1"></i>
+                        <span th:text="${m_alertValue}"></span>
+                    </div>
+
+                    <div th:if="${m_hasAlertDanger}" class="alert danger mb-6">
+                        <i class="fa-solid fa-circle-info mr-1"></i>
+                        <span th:text="${m_alertValue}"></span>
+                    </div>
+
+                    <div th:if="${param.error}" class="alert danger mb-6">
+                        <i class="fa-solid fa-circle-info mr-1"></i>
+                        <span>Invalid Email or Password</span>
+                    </div>
+
+                    <form
+                        th:action="@{/auth/login}"
+                        th:method="POST"
+                    >
+                        <div class="mb-6">
+                            <li class="block mb-2 font-medium">Email</li>
+                            <div class="relative">
+                                <input name="username" class="input" type="email" maxlength="255" required>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <li class="block mb-2 font-medium">Password</li>
+                            <div class="relative">
+                                <input name="password" class="input" type="password" id="jsPassControlInput"  required>
+                                <button id="jsPassControl" class="absolute right-[5px] top-[5px] p-1" type="button">
+                                    <i id="jsPassControlIcon" class="fa-solid fa-eye"></i>
+                                </button>
+                            </div>
+                        </div>
+                        <div class="mb-6">
+                            <input class="btn w-full" type="submit" value="Sign in">
+                        </div>
+                        <div class="text-center text-xs text-[--muted] underline cursor-pointer">
+                            <a th:href="@{/auth/reset}">Forgot your password?</a>
+                        </div>
+                    </form>
+                </div>
+                <!-- Sign up link -->
+                <div class="mt-6 mb-8">
+                    <p class="text-center text-[--muted]">
+                        Don't have a Jobspot account?
+                        <br />
+                        <a
+                            class="text-[--green-light] font-medium hover:underline"
+                            href="/auth/signup/candidate"
+                        >
+                            Sign up now for free
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Sing up -->
+        <div class="mx-auto w-[90%] max-w-[360px]">
+            <div class="border-t border-[#e1e6eb]"></div>
+            <div class="my-6">
+                <p class="text-center text-[--muted]">Recruiting? Try JobSpot for companies.</p>
+            </div>
+        </div>
+
+        <div class="p-8 bg-[#F7FAF7] w-full max-w-lg mx-auto rounded-lg flex items-stretch mb-8">
+            <div class="text-2xl mr-4 text-[--green]">
+                <i class="fa-solid fa-briefcase inline-block relative"></i>
+            </div>
+            <div class="grow">
+                <h1 class="font-bold text-[--text] text-xl">Jobspot for companies</h1>
+                <p class="text-[#5e6d55]">Get verified and hire the best talent out there for free.</p>
+            </div>
+            <div class="w-40 flex items-center">
+                <a class="btn" href="/auth/signup/company">Get Started</a>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>

@@ -1,0 +1,38 @@
+<div class="top-[50px] left-[64px] absolute right-0 block bottom-0 overflow-auto">
+    <div class="flex flex-col mt-10 px-[50px] overflow-hidden">
+        <div>
+            <h1 class="text-2xl font-normal pb-1">Companies</h1>
+            <div class="pb-0.5">Manage all the companies in one place.</div>
+            <div id="jsUnlistedCompanies" class="text-[--blue] hover:underline cursor-pointer leading-none">See companies without profile</div>
+        </div>
+        <div class="mt-10 mb-4">
+            <span th:text="${PROFILE_COMPLETED_COUNT}"></span> Companies - Profile Completed
+        </div>
+        <div class="w-3/5 overflow-auto" style="max-height: calc(100vh - 240px)">
+            <ul class="list-none">
+                <li th:each="company : ${PROFILE_COMPLETED_COMPANIES}" th:attr="data-drawer-id=${company.id}" id="company-details" class="flex border-b border-solid border-[#d8dcde] py-2 cursor-pointer">
+                    <div>
+                        <img th:src="${company.companyProfile.logo}" class="h-14 w-14">
+                    </div>
+                    <div class="pl-3 grow">
+                        <h1 th:text="${company.name}" class="font-medium text-base"></h1>
+                        <p>
+                            <span th:text="${company.companyProfile.headquarters}"></span>
+                            <span th:text="${company.companyProfile.category.getDisplayValue()}" class="bullet"></span>
+                            <span th:text="${company.companyProfile.companySize.getDisplayValue() + ' Employees'}" class="bullet"></span>
+                        </p>
+                        <p>12 Open Jobs</p>
+                    </div>
+                    <div class="flex items-center justify-center px-4">
+                        <i class="fa-solid fa-arrow-right"></i>
+                    </div>
+                </li>
+            </ul>
+        </div>
+        <script th:inline="javascript">
+            const PROFILE_COMPLETED_COMPANIES = /*[[${PROFILE_COMPLETED_COMPANIES}]]*/ [];
+            const UNLISTED_COMPANIES = /*[[${UNLISTED_COMPANIES}]]*/ [];
+
+        </script>
+    </div>
+</div>

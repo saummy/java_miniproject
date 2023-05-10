@@ -1,0 +1,108 @@
+<div class="top-[50px] left-[64px] absolute right-0 block bottom-0 overflow-auto z-0">
+    <div class="flex flex-col mt-10 px-[50px] overflow-hidden">
+        <div>
+            <h1 class="text-2xl font-normal pb-1">Company Profile</h1>
+            <div class="pb-0.5">Complete your profile to attract most of the talent</div>
+            <div class="my-3">
+                <a id="jsViewProfile" target="_blank" class="btn">
+                View Profile<i class="fa-solid fa-arrow-up-right-from-square ml-1"></i>
+                </a>
+                <script th:inline="javascript">
+                    const company = /*[[${User.name}]]*/ '';
+                    const aTag = document.getElementById("jsViewProfile");
+                    aTag.href = `/#/company/${company.toLocaleLowerCase().split(" ").join("-")}`
+                </script>
+            </div>
+        </div>
+        <div class="mt-10 mb-4 w-3/5">
+
+            <!-- Success Message -->
+            <div th:if="${HasAlertSuccess}" class="alert success my-3 ">
+                <i class="fa-solid fa-circle-info mr-1"></i>
+                <span th:text="${AlertValue}"></span>
+            </div>
+
+            <form class="w-full" method="post" th:action="@{/company/dashboard/profile}" th:object="${CompanyProfile}">
+                <div class="mb-4">
+                    <label class="block mb-2 font-medium">Headline</label>
+                    <div class="relative">
+                        <input th:field="*{headline}" name="headline" class="input" type="text" maxlength="150" required>
+                    </div>
+                    <p th:errors = "*{headline}" th:if="${#fields.hasErrors('headline')}" class="mt-1 text-red-400"></p>
+                </div>
+                <div class="mb-4 flex">
+                    <div class="basis-1/2 pr-5">
+                        <label class="block mb-2 font-medium">Category</label>
+                        <div class="relative">
+                            <select th:field="*{category}" name="category" class="input" type="text"  required>
+                                <option th:each="category : ${T(com.app.jobspot.enums.JobCategoryEnum).values()}"
+                                        th:value="${category}"
+                                        th:text="${category.displayValue}">
+                                </option>
+                            </select>
+                        </div>
+                        <p th:errors = "*{category}" th:if="${#fields.hasErrors('category')}" class="mt-1 text-red-400"></p>
+                    </div>
+                    <div class="basis-1/2 pl-5">
+                        <label class="block mb-2 font-medium">Founded In</label>
+                        <div class="relative">
+                            <select th:field="*{founded}" name="founded" class="input" required>
+                                <th:block th:each="year : ${#numbers.sequence(2023, 1800)}">
+                                    <option th:value="${year}" th:text="${year}" />
+                                </th:block>
+                            </select>
+                        </div>
+                        <p th:errors = "*{founded}" th:if="${#fields.hasErrors('founded')}" class="mt-1 text-red-400"></p>
+                    </div>
+                </div>
+                <div class="mb-4 flex">
+                    <div class="basis-1/2 pr-5">
+                        <label class="block mb-2 font-medium">Logo URL</label>
+                        <div class="relative">
+                            <input th:field="*{logo}" name="logo" class="input" type="text"  required>
+                        </div>
+                        <p th:errors = "*{logo}" th:if="${#fields.hasErrors('logo')}" class="mt-1 text-red-400"></p>
+                    </div>
+                    <div class="basis-1/2 pl-5">
+                        <label class="block mb-2 font-medium">Website</label>
+                        <div class="relative">
+                            <input th:field="*{website}" name="website" class="input" type="text" required>
+                        </div>
+                        <p th:errors = "*{website}" th:if="${#fields.hasErrors('website')}" class="mt-1 text-red-400"></p>
+                    </div>
+                </div>
+                <div class="mb-4 flex">
+                    <div class="basis-1/2 pr-5">
+                        <label class="block mb-2 font-medium">Headquarters</label>
+                        <div class="relative">
+                            <input th:field="*{headquarters}" name="headquarters" class="input" type="text" placeholder="Redmond, WA"  required>
+                        </div>
+                        <p th:errors = "*{headquarters}" th:if="${#fields.hasErrors('headquarters')}" class="mt-1 text-red-400"></p>
+                    </div>
+                    <div class="basis-1/2 pl-5">
+                        <label class="block mb-2 font-medium">Company Size</label>
+                        <div class="relative">
+                            <select th:field="*{companySize}" name="companySize"  class="input"  required>
+                                <option th:each="size : ${T(com.app.jobspot.enums.CompanySizeEnum).values()}"
+                                        th:value="${size}"
+                                        th:text="${size.displayValue}">
+                                </option>
+                            </select>
+                        </div>
+                        <p th:errors = "*{companySize}" th:if="${#fields.hasErrors('companySize')}" class="mt-1 text-red-400"></p>
+                    </div>
+                </div>
+                <div class="mb-4">
+                    <label class="block mb-2 font-medium">Overview</label>
+                    <div class="relative">
+                        <textarea th:field="*{description}" name="description" class="input h-full" rows="5" required></textarea>
+                    </div>
+                    <p th:errors = "*{description}" th:if="${#fields.hasErrors('description')}" class="mt-1 text-red-400"></p>
+                </div>
+                <div class="mt-4">
+                    <input type="submit" value="Update" class="btn">
+                </div>
+            </form>
+        </div>
+    </div>
+</div>

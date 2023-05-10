@@ -1,0 +1,121 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+
+<head th:replace="fragments/head" :: head></head>
+<body class="bg-[#f1f4f5]">
+    <main class="flex flex-col">
+        <!-- Header -->
+        <div class="flex items-center justify-center py-8">
+            <a href="/">
+                <img th:src="@{/assets/logo.svg}" alt="Jobspot" class="h-8"/>
+            </a>
+        </div>
+
+        <!-- Signup Form -->
+        <div class="flex flex-col items-center grow p-6">
+            <div class="flex flex-col w-full max-w-[360px]">
+                <div class="bg-white p-6 rounded-lg shadow-md">
+                    <h1 class="mb-6 text-center text-2xl text-[--text] font-bold">Join Jobspot for free</h1>
+                    <form
+                        th:action="@{/auth/signup/{persona}(persona=${js_persona})}"
+                        th:object="${user}"
+                        method="post"
+                        role="form"
+                    >
+                        <div class="mb-6">
+                            <li
+                                th:text="${js_persona == 'company'} ? 'Company Name' : 'Full Name'"
+                                class="block mb-2 font-medium"
+                            >
+                                Full Name
+                            </li>
+                            <div class="relative">
+                                <input th:field="*{name}" name="name" class="input" type="text"  required>
+                            </div>
+                            <p
+                                th:errors = "*{name}"
+                                th:if="${#fields.hasErrors('name')}"
+                                class="mt-1 text-red-400"
+                            >
+                            </p>
+                        </div>
+                        <div class="mb-6">
+                            <li th:if="${js_persona == 'company'}" class="block mb-2 font-medium">Work Email</li>
+                            <li th:unless="${js_persona == 'company'}" class="block mb-2 font-medium">Email</li>
+                            <div class="relative">
+                                <input th:field="*{email}" name="email" class="input" type="email" maxlength="255" required>
+                            </div>
+                            <p
+                                th:errors = "*{email}"
+                                th:if="${#fields.hasErrors('email')}"
+                                class="mt-1 text-red-400"
+                            >
+                            </p>
+                        </div>
+                        <div class="mb-6">
+                            <li class="block mb-2 font-medium">Password</li>
+                            <div class="relative">
+                                <input th:field="*{password}" name="password" class="input" type="password"  required>
+                            </div>
+                            <p
+                                th:errors = "*{password}"
+                                th:if="${#fields.hasErrors('password')}"
+                                class="mt-1 text-red-400"
+                            >
+                            </p>
+                        </div>
+<!--                        <div th:if="${js_persona == 'company'}" class="mb-6">-->
+<!--                            <li class="block mb-2 font-medium">Logo URL</li>-->
+<!--                            <div class="relative">-->
+<!--                                <input class="input" type="url"  required>-->
+<!--                            </div>-->
+<!--                        </div>-->
+                        <div class="mb-6">
+                            <input class="btn w-full" type="submit" value="Sign up">
+                        </div>
+                        <div class="text-center text-xs text-[--muted]">
+                            By joining you agree to
+                            <a href="#" class="underline cursor-pointer">terms of use</a>
+                        </div>
+                    </form>
+                </div>
+                <!-- Login link -->
+                <div class="mt-6 mb-8">
+                    <p class="text-center text-[--muted]">
+                        Already have a Jobspot account?
+                        <a
+                            class="text-[--green-light] font-medium hover:underline"
+                            th:href="@{/auth/login}"
+                        >
+                            Login
+                        </a>
+                    </p>
+                </div>
+            </div>
+        </div>
+
+        <!-- Company Sing up -->
+        <div th:if="${js_persona == 'candidate'}" class="mx-auto w-[90%] max-w-[360px]">
+            <div class="border-t border-[#e1e6eb]"></div>
+            <div class="my-6">
+                <p class="text-center text-[--muted]">Recruiting? Try JobSpot for companies.</p>
+            </div>
+        </div>
+
+        <div th:if="${js_persona == 'candidate'}" class="p-8 bg-[#F7FAF7] w-full max-w-lg mx-auto rounded-lg flex items-stretch mb-8">
+            <div class="text-2xl mr-4 text-[--green]">
+                <i class="fa-solid fa-briefcase inline-block relative"></i>
+            </div>
+            <div class="grow">
+                <h1 class="font-bold text-[--text] text-xl">Jobspot for companies</h1>
+                <p class="text-[#5e6d55]">Get verified and hire the best talent out there for free.</p>
+            </div>
+            <div class="w-40 flex items-center">
+                <a class="btn" href="/auth/signup/company">Get Started</a>
+            </div>
+        </div>
+
+    </main>
+</body>
+
+</html>
